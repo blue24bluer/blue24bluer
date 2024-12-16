@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Real IP Address</title>
+</head>
+<body>
+    <h1>Your Real IP Address</h1>
+    <p id="ip"></p>
+
+    <script>
+        // استخدم خدمة ipify للحصول على الـ IP العام
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())  // تحويل الاستجابة إلى JSON
+            .then(data => {
+                // عرض الـ IP في الصفحة
+                document.getElementById('ip').innerText = 'Your IP address is: ' + data.ip;
+            })
+            .catch(error => {
+                console.error('Error fetching IP:', error);
+            });
+    </script>
+</body>
+</html>
