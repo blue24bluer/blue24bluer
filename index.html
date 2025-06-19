@@ -1,25 +1,299 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Real IP Address</title>
+    <title>السيرة الذاتية - Blue24Bluer</title>
+    <!-- استيراد الخطوط والأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-glow-color: #00aaff;
+            --secondary-glow-color: #aa00ff;
+            --background-dark: #0a0a1f;
+            --container-bg: rgba(13, 17, 43, 0.65);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #e0f7ff;
+            --text-secondary: #c0d0f0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 3rem 1.5rem; /* مساحة للتنفس */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* السماح بالتمرير */
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* --- خلفية النجوم المتحركة --- */
+        .stars {
+            position: fixed; /* لتثبيت الخلفية أثناء التمرير */
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
+            background: transparent;
+        }
+        .stars .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px white, 0 0 10px white;
+            animation: move-stars 150s linear infinite;
+        }
+        .star:nth-child(1) { top: 20%; left: 25%; width: 1px; height: 1px; animation-duration: 50s; }
+        .star:nth-child(2) { top: 80%; left: 30%; width: 2px; height: 2px; animation-duration: 80s; }
+        .star:nth-child(3) { top: 10%; left: 70%; width: 1px; height: 1px; animation-duration: 120s; }
+        .star:nth-child(4) { top: 90%; left: 90%; width: 1px; height: 1px; animation-duration: 90s; }
+        .star:nth-child(5) { top: 50%; left: 50%; width: 2px; height: 2px; animation-duration: 70s; }
+
+        @keyframes move-stars {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-2000px); }
+        }
+
+        /* --- حاوية السيرة الذاتية --- */
+        .cv-container {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            padding: 2.5rem 3rem;
+            background-color: var(--container-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 2px solid var(--primary-glow-color);
+            box-shadow: 
+                0 0 25px rgba(0, 170, 255, 0.4),
+                inset 0 0 15px rgba(0, 170, 255, 0.3);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- الهيدر والمعلومات الشخصية --- */
+        .profile-header {
+            margin-bottom: 2rem;
+        }
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-glow-color);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px var(--primary-glow-color);
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px var(--primary-glow-color); }
+            50% { box-shadow: 0 0 35px var(--primary-glow-color), 0 0 15px var(--secondary-glow-color); }
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            margin: 0;
+            color: white;
+            text-shadow: 0 0 10px var(--primary-glow-color), 0 0 25px var(--primary-glow-color);
+        }
+        .subtitle {
+            font-size: 1.4em;
+            color: var(--primary-glow-color);
+            margin-top: 0.5rem;
+            font-weight: 700;
+        }
+
+        .glow-divider {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to left, transparent, var(--primary-glow-color), transparent);
+            margin: 2rem auto;
+        }
+        
+        /* --- الأقسام العامة --- */
+        .section {
+            margin-bottom: 2.5rem;
+            text-align: right;
+        }
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* لليمين في وضع RTL */
+            gap: 15px;
+            border-bottom: 2px solid var(--card-border);
+            padding-bottom: 0.75rem;
+        }
+        .section-title i {
+            color: var(--primary-glow-color);
+            text-shadow: 0 0 10px var(--primary-glow-color);
+        }
+        .section-content p, .section-content li {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* --- قسم المهارات (تصميم خاص) --- */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* توسيط البطاقات */
+            gap: 15px;
+        }
+        .skill-tag {
+            background-color: rgba(0, 170, 255, 0.1);
+            border: 1px solid var(--primary-glow-color);
+            color: var(--primary-glow-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .skill-tag:hover {
+            background-color: var(--primary-glow-color);
+            color: var(--background-dark);
+            box-shadow: 0 0 15px var(--primary-glow-color);
+            transform: translateY(-3px);
+        }
+
+        /* --- قسم الشهادات (مُعدل) --- */
+        .cert-list {
+            list-style: none;
+            padding: 0;
+        }
+        .cert-list li {
+            background-color: rgba(28, 37, 61, 0.4);
+            border: 1px solid var(--card-border);
+            border-right: 4px solid var(--primary-glow-color); /* شريط التمييز الأيمن */
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .cert-list li:hover {
+            background-color: var(--card-border);
+            transform: translateX(-5px); /* حركة خفيفة عند المرور */
+        }
+        .cert-list li i {
+            color: var(--primary-glow-color);
+            font-size: 1.2em;
+        }
+
+        /* --- زر التواصل --- */
+        .contact-section {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px 40px;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: var(--primary-glow-color);
+            color: var(--background-dark);
+            border: 2px solid var(--primary-glow-color);
+            box-shadow: 0 0 20px var(--primary-glow-color);
+        }
+        .btn:hover {
+            box-shadow: 0 0 30px var(--primary-glow-color), 0 0 50px var(--primary-glow-color);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .cv-container { padding: 2rem 1.5rem; }
+            .main-title { font-size: 2.5em; }
+            .subtitle { font-size: 1.2em; }
+            .section-title { font-size: 1.5em; }
+            .section-content p, .section-content li, .skill-tag { font-size: 1em; }
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Your Real IP Address</h1>
-    <p id="ip"></p>
+    <div class="stars">
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div>
+    </div>
+    
+    <div class="cv-container">
+        <header class="profile-header">
+            <img src="https://avatars.githubusercontent.com/u/119597827?v=4" alt="صورة Blue24bluer الشخصية" class="profile-avatar">
+            <h1 class="main-title">Blue24bluer</h1>
+            <p class="subtitle">باحث أمني ومبرمج متعدد اللغات</p>
+        </header>
 
-    <script>
-        // استخدم خدمة ipify للحصول على الـ IP العام
-        fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())  // تحويل الاستجابة إلى JSON
-            .then(data => {
-                // عرض الـ IP في الصفحة
-                document.getElementById('ip').innerText = 'Your IP address is: ' + data.ip;
-            })
-            .catch(error => {
-                console.error('Error fetching IP:', error);
-            });
-    </script>
+        <hr class="glow-divider">
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-user-secret"></i> نبذة تعريفية</h2>
+            <div class="section-content">
+                <p>خبير متخصص في مجال الأمن السيبراني، مع تركيز خاص على اكتشاف الثغرات في تطبيقات الويب والمشاركة الفعالة في برامج مكافآت الثغرات (Bug Bounty). أمتلك شغفاً عميقاً بتحليل الأنظمة وتأمينها ضد التهديدات الرقمية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-code"></i> المهارات ولغات البرمجة</h2>
+            <div class="skills-grid">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Bash</span>
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">C</span>
+                <span class="skill-tag">Ruby</span>
+                <span class="skill-tag">Go</span>
+                <span class="skill-tag">Batch</span>
+                <span class="skill-tag">Lua</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">Bug Bounty</span>
+                <span class="skill-tag">Web Exploitation</span>
+                <span class="skill-tag">Network Security</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-certificate"></i> الشهادات والخبرات</h2>
+            <div class="section-content">
+                <!-- <<-- تم تحديث هذا القسم -->> -->
+                <ul class="cert-list">
+                    <li><i class="fas fa-terminal"></i> شهادة احترافية في الاختراق الهجومي (OSCP).</li>
+                    <li><i class="fas fa-hat-wizard"></i> شهادة الهكر الأخلاقي المعتمد (CEH).</li>
+                    <li><i class="fas fa-shield-halved"></i> شهادة +Security في أساسيات الأمن السيبراني.</li>
+                    <li><i class="fas fa-sitemap"></i> شهادة +Network في أساسيات الشبكات.</li>
+                    <li><i class="fas fa-network-wired"></i> خبرة وشهادة في إعداد واستخدام راوترات Cisco.</li>
+                    <li><i class="fas fa-wifi"></i> خبرة متقدمة في التعامل مع أجهزة MikroTik.</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="contact-section">
+            <a href="https://t.me/blue24bluer" target="_blank" class="btn">
+                <i class="fab fa-telegram-plane"></i>
+                <span>تواصل معي</span>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
