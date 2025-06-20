@@ -10,7 +10,7 @@
     <style>
         :root {
             --primary-glow-color: #00aaff;
-            --secondary-glow-color: #aa00ff;
+            --secondary-glow-color: #aa00ff; /* لون توهج ثانوي جديد للأزرار */
             --background-dark: #0a0a1f;
             --container-bg: rgba(13, 17, 43, 0.65);
             --card-border: rgba(255, 255, 255, 0.1);
@@ -23,18 +23,17 @@
             background-color: var(--background-dark);
             color: var(--text-primary);
             margin: 0;
-            padding: 3rem 1.5rem; /* مساحة للتنفس */
+            padding: 3rem 1.5rem;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* السماح بالتمرير */
+            align-items: flex-start;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
         
-        /* --- خلفية النجوم المتحركة --- */
         .stars {
-            position: fixed; /* لتثبيت الخلفية أثناء التمرير */
+            position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
             background: transparent;
@@ -57,7 +56,6 @@
             to { transform: translateY(-2000px); }
         }
 
-        /* --- حاوية السيرة الذاتية --- */
         .cv-container {
             position: relative;
             max-width: 900px;
@@ -78,7 +76,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- الهيدر والمعلومات الشخصية --- */
         .profile-header {
             margin-bottom: 2rem;
         }
@@ -116,8 +113,53 @@
             background-image: linear-gradient(to left, transparent, var(--primary-glow-color), transparent);
             margin: 2rem auto;
         }
+
+        /* --- === قسم الأزرار الجديد === --- */
+        .action-links-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 3rem;
+            flex-wrap: wrap; /* لضمان التوافق مع الشاشات الصغيرة */
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 28px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px; /* جعلها أكثر دائرية */
+            transition: all 0.3s ease;
+            border: 2px solid;
+            background-color: transparent;
+        }
+
+        .action-btn.store-btn {
+            color: var(--primary-glow-color);
+            border-color: var(--primary-glow-color);
+        }
+        .action-btn.store-btn:hover {
+            background-color: var(--primary-glow-color);
+            color: var(--background-dark);
+            box-shadow: 0 0 25px var(--primary-glow-color);
+            transform: translateY(-5px);
+        }
         
-        /* --- الأقسام العامة --- */
+        .action-btn.contact-btn {
+            color: var(--secondary-glow-color);
+            border-color: var(--secondary-glow-color);
+        }
+        .action-btn.contact-btn:hover {
+            background-color: var(--secondary-glow-color);
+            color: var(--background-dark);
+            box-shadow: 0 0 25px var(--secondary-glow-color);
+            transform: translateY(-5px);
+        }
+        /* --- نهاية قسم الأزرار --- */
+
         .section {
             margin-bottom: 2.5rem;
             text-align: right;
@@ -129,7 +171,7 @@
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* لليمين في وضع RTL */
+            justify-content: flex-start;
             gap: 15px;
             border-bottom: 2px solid var(--card-border);
             padding-bottom: 0.75rem;
@@ -144,11 +186,10 @@
             line-height: 1.8;
         }
 
-        /* --- قسم المهارات (تصميم خاص) --- */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* توسيط البطاقات */
+            justify-content: center;
             gap: 15px;
         }
         .skill-tag {
@@ -168,7 +209,6 @@
             transform: translateY(-3px);
         }
 
-        /* --- قسم الشهادات (مُعدل) --- */
         .cert-list {
             list-style: none;
             padding: 0;
@@ -176,7 +216,7 @@
         .cert-list li {
             background-color: rgba(28, 37, 61, 0.4);
             border: 1px solid var(--card-border);
-            border-right: 4px solid var(--primary-glow-color); /* شريط التمييز الأيمن */
+            border-right: 4px solid var(--primary-glow-color);
             padding: 15px 20px;
             margin-bottom: 10px;
             border-radius: 8px;
@@ -187,14 +227,13 @@
         }
         .cert-list li:hover {
             background-color: var(--card-border);
-            transform: translateX(-5px); /* حركة خفيفة عند المرور */
+            transform: translateX(-5px);
         }
         .cert-list li i {
             color: var(--primary-glow-color);
             font-size: 1.2em;
         }
 
-        /* --- زر التواصل --- */
         .contact-section {
             text-align: center;
             margin-top: 3rem;
@@ -226,7 +265,6 @@
             .section-title { font-size: 1.5em; }
             .section-content p, .section-content li, .skill-tag { font-size: 1em; }
         }
-
     </style>
 </head>
 <body>
@@ -244,6 +282,18 @@
         </header>
 
         <hr class="glow-divider">
+        
+        <!-- === الأزرار الجديدة المضافة هنا === -->
+        <div class="action-links-container">
+            <a href="https://neobot.pythonanywhere.com/BlueStore" target="_blank" class="action-btn store-btn">
+                <i class="fas fa-store"></i>
+                <span>تصفح المتجر</span>
+            </a>
+            <a href="https://neobot.pythonanywhere.com/" target="_blank" class="action-btn contact-btn">
+                <i class="fas fa-comments"></i>
+                <span>تواصل معي</span>
+            </a>
+        </div>
 
         <section class="section">
             <h2 class="section-title"><i class="fas fa-user-secret"></i> نبذة تعريفية</h2>
@@ -255,20 +305,13 @@
         <section class="section">
             <h2 class="section-title"><i class="fas fa-code"></i> المهارات ولغات البرمجة</h2>
             <div class="skills-grid">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">Bash</span>
-                <span class="skill-tag">C++</span>
-                <span class="skill-tag">C</span>
-                <span class="skill-tag">Ruby</span>
-                <span class="skill-tag">Go</span>
-                <span class="skill-tag">Batch</span>
-                <span class="skill-tag">Lua</span>
-                <span class="skill-tag">PHP</span>
-                <span class="skill-tag">HTML</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">CSS</span>
-                <span class="skill-tag">Bug Bounty</span>
-                <span class="skill-tag">Web Exploitation</span>
+                <span class="skill-tag">Python</span><span class="skill-tag">Bash</span>
+                <span class="skill-tag">C++</span><span class="skill-tag">C</span>
+                <span class="skill-tag">Ruby</span><span class="skill-tag">Go</span>
+                <span class="skill-tag">Batch</span><span class="skill-tag">Lua</span>
+                <span class="skill-tag">PHP</span><span class="skill-tag">HTML</span>
+                <span class="skill-tag">JavaScript</span><span class="skill-tag">CSS</span>
+                <span class="skill-tag">Bug Bounty</span><span class="skill-tag">Web Exploitation</span>
                 <span class="skill-tag">Network Security</span>
             </div>
         </section>
@@ -276,7 +319,6 @@
         <section class="section">
             <h2 class="section-title"><i class="fas fa-certificate"></i> الشهادات والخبرات</h2>
             <div class="section-content">
-                <!-- <<-- تم تحديث هذا القسم -->> -->
                 <ul class="cert-list">
                     <li><i class="fas fa-terminal"></i> شهادة احترافية في الاختراق الهجومي (OSCP).</li>
                     <li><i class="fas fa-hat-wizard"></i> شهادة الهكر الأخلاقي المعتمد (CEH).</li>
@@ -289,9 +331,10 @@
         </section>
 
         <div class="contact-section">
+            <!-- ملاحظة: هذا الزر يختلف عن الأزرار الجديدة، يمكن الاحتفاظ به أو إزالته -->
             <a href="https://t.me/blue24bluer" target="_blank" class="btn">
                 <i class="fab fa-telegram-plane"></i>
-                <span>تواصل معي</span>
+                <span>التواصل عبر تليجرام</span>
             </a>
         </div>
     </div>
